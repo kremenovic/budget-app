@@ -1,8 +1,19 @@
 // General CSS
 
 :root {
-  --container-color: #1F1B24;
-
+  --mainContainer-color: #1F1B24;
+  --contentContainer-color: #2A272F;
+  --income-color: #03DAC5;
+  --expense-color: #BB86FC;
+  --incomeBackground-color: #332940;
+  --expenseBackground-color: #3B383F;
+  --clothes-color: #F48FB1;
+  --gifts-color: #9575CD;
+  --shopping-color: #64B5F6;
+  --eatingOut-color: #DCE775;
+  --sports-color: #FFB74D;
+  --borderRadius: 5px;
+  --inputBackground: #5B5860;
 }
 
 * {
@@ -10,4 +21,246 @@
   margin: 0;
   padding: 0;
   font-family: 'Montserrat', sans-serif;
+}
+
+h1 {
+  font-size: 30px;
+  color: #fff;
+  font-weight: 600;
+}
+
+h3 {
+  font-size: 22px;
+  color: var(--expense-color);
+  font-weight: 600;
+  padding-bottom: 30px;
+}
+
+/* Main Container */
+
+.mainContainer {
+  background-color: var(--mainContainer-color);
+  height: 100vh;
+  padding: 20px 100px 105px;
+  width: 100%;
+  overflow-y: scroll;
+
+  &__info {
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 20px;
+
+    #balance {
+      color: var(--income-color);
+    }
+  }
+
+  &__content {
+    background-color: var(--contentContainer-color);
+    border-radius: var(--borderRadius);
+    padding: 60px 40px 50px;
+
+    &_section {
+      display: flex;
+
+      &__transactions {
+        width: 50%;
+        margin-right: 10px;
+  
+        #transactions {
+          max-height: 450px;
+          &.scroll {
+            overflow-y: scroll;
+          }
+  
+          .noTransactions {
+            color: #fff;
+          }
+          ul {
+            list-style-type: none;
+  
+            li {
+              display: flex;;
+              justify-content: space-between;
+              border-radius: 5px;
+              font-size: 22px;
+              color: #fff;
+              padding: 10px 20px;
+              margin-bottom: 10px;
+  
+              &:last-child {  
+                margin-bottom: 0px;
+              }
+  
+              &.income {
+                background-color: var(--incomeBackground-color);
+              }
+              &.expense {
+                background-color: var(--expenseBackground-color);
+              }
+            }
+          }
+        }
+      }
+  
+      &__summary {
+        width: 50%;
+        margin-left: 10px;
+
+        .progress {
+          &__info {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+
+            p {
+              font-size: 16px;
+              font-weight: 600;
+            }
+
+            &_income {
+              color: var(--income-color);
+            }
+            &_expense {
+              color: var(--expense-color);
+            }
+          }
+          &__bar {
+            background-color: var(--income-color);
+            border-top-right-radius: 25px;
+            border-bottom-right-radius: 25px;
+            border-top-left-radius: 25px;
+            border-bottom-left-radius: 25px;
+
+            &_value {
+              background-color: var(--expense-color);
+              border-top-left-radius: 25px;
+              border-bottom-left-radius: 25px;
+              height: 27px;
+              width: 50%;
+            }
+          }
+        }
+      }
+    }
+    
+  }
+}
+
+.btns {
+  display: flex;
+  margin-top: 50px;
+
+  .btn {
+    font-size: 22px;
+    padding: 15px 55px;
+    border: none;
+    outline: none;
+    border-radius: var(--borderRadius);
+    cursor: pointer;
+    transition: 0.3s;
+    color: #fff;
+
+    &:hover {
+      opacity: 0.8;
+    }
+
+    &__income {
+      background-color: var(--income-color);
+      margin-right: 10px;
+    }
+    &__expense {
+      background-color: var(--expense-color);
+      margin-left: 10px;
+    }
+    &__save {
+      background-color: var(--income-color);
+      margin-right: 10px;
+    }
+    &__cancel {
+      background-color: transparent;
+      border: 1px solid var(--income-color);
+      margin-left: 10px;
+    }
+  }
+}
+
+#overlay {
+  position: fixed;
+  opacity: 0;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(31, 27, 36, 0.73);
+  pointer-events: none;
+  transition: 200ms ease-in-out;
+  z-index: 999998;
+ 
+    &.active {
+      opacity: 1;
+      pointer-events: all;
+  }
+}
+
+.addTransaction {
+    padding: 55px 35px 75px;
+    border-radius: var(--borderRadius);
+    position: fixed;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%,-50%) scale(0);
+    transition: 200ms ease-in-out;
+    z-index: 999999;
+    background-color: var(--incomeBackground-color);
+    width: 600px;
+    max-width: 80%;
+
+    .btns {
+      
+      .btn {
+        width: 50%;
+      }
+    }
+
+    h3 {
+      color: var(--income-color);
+    }
+
+    &.active {
+      transform: translate(-50%,-50%) scale(1);
+    }
+
+    &__form {
+      display: flex;
+      flex-direction: column;
+
+      &__input {
+        margin-bottom: 10px;
+        background-color: var(--inputBackground);
+        color: #fff;
+        height: 50px;
+        border: none;
+        outline: none;
+        border-radius: var(--borderRadius);
+        padding-left: 15px;
+        font-size: 18px;
+
+        &::placeholder {
+          color: rgba(255, 255, 255, 0.664);
+        }
+      }
+
+      &__select {
+        background-color: var(--inputBackground);
+        color: #fff;
+        height: 50px;
+        border: none;
+        outline: none;
+        border-radius: var(--borderRadius);
+        padding-left: 15px;
+        padding-right: 15px;
+        font-size: 18px;
+      }
+    }
 }

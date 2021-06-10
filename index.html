@@ -10,6 +10,86 @@
   <title>Budget App Project</title>
 </head>
 <body>
+  <div class="mainContainer">
+    <div class="mainContainer__info">
+      <h1>Budget Planner</h1>
+      <h1>Balance: <span id="balance" class="js-balance">$568</span> </h1>
+    </div>
+    <div class="mainContainer__content">
+      <div class="mainContainer__content_section">
+        <div class="mainContainer__content_section__transactions">
+          <h3>Transcations</h3>
+          <div id="transactions" class="scroll js-transactions">
+            <!-- <h3 class="noTransactions">No transactions</h3> -->
+            <ul>
+              <li class="income">Clothes | Blue T-Shirt <span class="amount">$50</span></li>
+              <li class="expense">Clothes | Blue T-Shirt <span class="amount">$50</span></li>
+              <li class="expense">Clothes | Blue T-Shirt <span class="amount">$50</span></li>
+              <li class="expense">Clothes | Blue T-Shirt <span class="amount">$50</span></li>
+              <li class="expense">Clothes | Blue T-Shirt <span class="amount">$50</span></li>
+              <li class="expense">Clothes | Blue T-Shirt <span class="amount">$50</span></li>
+              <li class="expense">Clothes | Blue T-Shirt <span class="amount">$50</span></li>
+              <li class="expense">Clothes | Blue T-Shirt <span class="amount">$50</span></li>
+              <li class="expense">Clothes | Red T-Shirt <span class="amount">$50</span></li>
+            </ul>
+          </div>
+        </div>
+        <div class="mainContainer__content_section__summary">
+          <h3>Summary</h3>
+          <div class="progress">
+            <div class="progress__info">
+              <p class="progress__info_expense">Expense</p>
+              <p class="progress__info_income">Income</p>
+            </div>
+            <div class="progress__bar">
+              <div class="progress__bar_value js-progressBarValue"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="btns">
+        <button class="btn btn__income js-addIncome">+ Income</button>
+        <button class="btn btn__expense js-addExpense">- Expense</button>
+      </div>
+    </div>
+  </div>
+  <!-- Add Income Pop Up -->
+  <div id="js-addIncome" class="addTransaction">
+    <h3>Add Income</h3>
+    <div class="addTransaction__form">
+      <input type="text" placeholder="Title" class="addTransaction__form__input js-income-title">
+      <input type="text" placeholder="Amount" class="addTransaction__form__input js-income-amount">
+      <select name="category" id="category" class="addTransaction__form__select js-income-category">
+        <option value="" disabled selected>Select...</option>
+        <option value="income">Income</option>
+      </select>
+    </div>
+    <div class="btns">
+      <button class="btn btn__save js-saveIncome">Save</button>
+      <button class="btn btn__cancel js-cancelIncome">Cancel</button>
+    </div>
+  </div>
+  <!-- Add Expense Pop Up -->
+  <div id="js-addExpense" class="addTransaction">
+    <h3>Add Expense</h3>
+    <div class="addTransaction__form">
+      <input type="text" placeholder="Title" class="addTransaction__form__input js-expense-title">
+      <input type="text" placeholder="Amount" class="addTransaction__form__input js-expense-amount">
+      <select name="category" id="category" class="addTransaction__form__select js-expense-category">
+        <option value="" disabled selected>Select...</option>
+        <option value="clothes">Clothes</option>
+        <option value="gifts">Gifts</option>
+        <option value="shopping">Shopping</option>
+        <option value="eatingOut">Eating out</option>
+        <option value="sports">Sports</option>
+      </select>
+    </div>
+    <div class="btns">
+      <button class="btn btn__save js-saveExpense">Save</button>
+      <button class="btn btn__cancel js-cancelExpense">Cancel</button>
+    </div>
+  </div>
+  <div id="overlay" class="js-overlay"></div>
   
   <script src="https://cdn.jsdelivr.net/npm/chart.js@3.3.2/dist/chart.min.js"></script>
   <script src="./main.js"></script>
