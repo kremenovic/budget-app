@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="./css/style.css">
   <link rel="icon" type="image/jpg" href="./favicon-32x32.png"/>
@@ -43,6 +44,24 @@
             </div>
             <div class="progress__bar">
               <div class="progress__bar_value js-progressBarValue"></div>
+            </div>
+          </div>
+          <div class="chart">
+            <div class="chart__left">
+              <p>Income <span class="chart__left__income">$1000</span></p>
+              <p>Expense <span class="chart__left__expense">$350</span></p>
+              <ul class="chart__left__list">
+                <li class="chart__left__list__item"><span class="item__clothes"><i class="fas fa-square-full"></i> Clothes</span> <span class="js-chart-clothes">$350</span></li>
+                <li class="chart__left__list__item"><span class="item__gifts"><i class="fas fa-square-full"></i> Gifts</span> <span class="js-chart-gifts">$350</span></li>
+                <li class="chart__left__list__item"><span class="item__shopping"><i class="fas fa-square-full"></i> Shopping</span> <span class="js-chart-shopping">$350</span></li>
+                <li class="chart__left__list__item"><span class="item__eatingOut"><i class="fas fa-square-full"></i> Eating out</span> <span class="js-chart-eatingOut">$350</span></li>
+                <li class="chart__left__list__item"><span class="item__sports"><i class="fas fa-square-full"></i> Sports</span> <span class="js-chart-sports">$350</span></li>
+              </ul>
+            </div>
+            <div class="chart__right">
+              <div class="budget_cart">
+                <canvas id="budgetChart" width="355" height="355"></canvas>
+              </div>
             </div>
           </div>
         </div>

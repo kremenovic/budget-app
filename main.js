@@ -5,6 +5,7 @@ const jsProgressBar = document.querySelector(".js-progressBarValue");
 const jsAddIncomeBtn = document.querySelector(".js-addIncome");
 const jsAddExpenseBtn = document.querySelector(".js-addExpense");
 const jsOverlay = document.querySelector(".js-overlay");
+let jsChart = document.getElementById('budgetChart').getContext('2d');
 // POP UP ELEMENTS
 // add income
 const jsAddIncome = document.getElementById("js-addIncome");
@@ -42,6 +43,37 @@ const showAddExpense = () => {
   showPopUp(jsAddExpense, jsCancelExpense);
 }
 
+// CHART
+
+// colors
+const chartColors = ["#03DAC5", "#F48FB1", "#9575CD", "#64B5F6", "#DCE775", "#FFB74D"]
+
+
+const chart = new Chart(jsChart, {
+  type: 'doughnut',
+  data: {
+      labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+      datasets: [{
+          data: [12, 19, 3, 5, 2, 3],
+          backgroundColor: chartColors,
+          borderColor: chartColors,
+          borderWidth: 1
+      }]
+  },
+  options: {
+      plugins: {
+        legend: {
+          display: false
+        }
+      }
+  }
+});
+
 // EVENT LISTENERS
 jsAddIncomeBtn.addEventListener("click", showAddIncome);
 jsAddExpenseBtn.addEventListener("click", showAddExpense);
+
+window.addEventListener("DOMContentLoaded", () => {
+  jsChart.canvas.parentNode.style.height = '355px';
+  jsChart.canvas.parentNode.style.width = '355px';
+})

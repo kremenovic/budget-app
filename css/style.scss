@@ -68,7 +68,23 @@ h3 {
         margin-right: 10px;
   
         #transactions {
-          max-height: 450px;
+          max-height: 445px;
+
+          &::-webkit-scrollbar {
+            display: block;
+            width: 5px;
+          }
+
+          &::-webkit-scrollbar-track {
+            background: var(--expenseBackground-color);
+          }
+            
+          &::-webkit-scrollbar-thumb {
+            background-color: var(--income-color);
+            border-right: none;
+            border-left: none;
+          }
+
           &.scroll {
             overflow-y: scroll;
           }
@@ -141,6 +157,92 @@ h3 {
             }
           }
         }
+
+        .chart {
+          display: flex;
+          margin-top: 50px;
+
+          &__left {
+            width: 40%;
+            margin-right: 20px;
+
+            p {
+              display: flex;
+              justify-content: space-between;
+              font-size: 18px;
+              color: #fff;
+              font-weight: 600;
+              margin-bottom: 20px;
+            }
+
+            &__income {
+              color: var(--income-color);
+            }
+
+            &__expense {
+              color: var(--expense-color);
+            }
+
+            &__list {
+              list-style-type: none;
+
+              &__item {
+                display: flex;
+                justify-content: space-between;
+                color: #fff;
+                font-size: 16px;
+                font-weight: 600;
+                margin-bottom: 15px;
+
+                i {
+                  font-size: 14px;
+                }
+
+                .item__clothes {
+                  i {
+                    color: var(--clothes-color);
+                  }
+                }
+
+                .item__gifts {
+                  i {
+                    color: var(--gifts-color);
+                  }
+                }
+
+                .item__shopping {
+                  i {
+                    color: var(--shopping-color);
+                  }
+                }
+
+                .item__eatingOut {
+                  i {
+                    color: var(--eatingOut-color);
+                  }
+                }
+
+
+                .item__sports {
+                  i {
+                    color: var(--sports-color);
+                  }
+                }
+
+                &:last-child {
+                  margin-bottom: 0px;
+                }
+              }
+            }
+          }
+
+          &__right {
+            width: 60%;
+            margin-left: 20px;
+            display: flex;
+            justify-content: center;
+          }
+        }
       }
     }
     
@@ -204,63 +306,123 @@ h3 {
 }
 
 .addTransaction {
-    padding: 55px 35px 75px;
-    border-radius: var(--borderRadius);
-    position: fixed;
-    top: 40%;
-    left: 50%;
-    transform: translate(-50%,-50%) scale(0);
-    transition: 200ms ease-in-out;
-    z-index: 999999;
-    background-color: var(--incomeBackground-color);
-    width: 600px;
-    max-width: 80%;
+  padding: 55px 35px 75px;
+  border-radius: var(--borderRadius);
+  position: fixed;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%,-50%) scale(0);
+  transition: 200ms ease-in-out;
+  z-index: 999999;
+  background-color: var(--incomeBackground-color);
+  width: 600px;
+  max-width: 80%;
 
-    .btns {
-      
-      .btn {
-        width: 50%;
+  .btns {
+    
+    .btn {
+      width: 50%;
+    }
+  }
+
+  h3 {
+    color: var(--income-color);
+  }
+
+  &.active {
+    transform: translate(-50%,-50%) scale(1);
+  }
+
+  &__form {
+    display: flex;
+    flex-direction: column;
+
+    &__input {
+      margin-bottom: 10px;
+      background-color: var(--inputBackground);
+      color: #fff;
+      height: 50px;
+      border: none;
+      outline: none;
+      border-radius: var(--borderRadius);
+      padding-left: 15px;
+      font-size: 18px;
+
+      &::placeholder {
+        color: rgba(255, 255, 255, 0.664);
       }
     }
 
-    h3 {
-      color: var(--income-color);
+    &__select {
+      background-color: var(--inputBackground);
+      color: #fff;
+      height: 50px;
+      border: none;
+      outline: none;
+      border-radius: var(--borderRadius);
+      padding-left: 15px;
+      padding-right: 15px;
+      font-size: 18px;
     }
+  }
+}
 
-    &.active {
-      transform: translate(-50%,-50%) scale(1);
-    }
+/* RESPONSIVE */
 
-    &__form {
-      display: flex;
+@media only screen and (max-width: 1024px) {
+  .mainContainer {
+    padding: 40px 40px 105px;
+
+    &__content_section {
       flex-direction: column;
 
-      &__input {
-        margin-bottom: 10px;
-        background-color: var(--inputBackground);
-        color: #fff;
-        height: 50px;
-        border: none;
-        outline: none;
-        border-radius: var(--borderRadius);
-        padding-left: 15px;
-        font-size: 18px;
+      &__transactions {
+        width: 100%
+      }
 
-        &::placeholder {
-          color: rgba(255, 255, 255, 0.664);
+      &__summary {
+        width: 100%;
+        margin-top: 60px;
+        margin-left: 0px;
+
+        .chart {
+          flex-direction: column;
+
+          &__left {
+            width: 100%;
+            margin-right: 0px;
+          }
+
+          &__right {
+            width: 100%;
+            margin-top: 60px;
+            margin-left: 0px;
+          }
         }
       }
-
-      &__select {
-        background-color: var(--inputBackground);
-        color: #fff;
-        height: 50px;
-        border: none;
-        outline: none;
-        border-radius: var(--borderRadius);
-        padding-left: 15px;
-        padding-right: 15px;
-        font-size: 18px;
-      }
     }
+  }
+
+  .btns {
+    margin-top: 85px;
+    justify-content: center;
+  }
+}
+
+@media only screen and (max-width: 540px) {
+  h1 {
+    font-size: 25px;
+  }
+  
+  .mainContainer {
+    &__content {
+      padding: 60px 15px 50px;
+    }
+  }
+
+  .btns {
+    .btn {
+      padding: 15px 40px;
+    }
+  }
 }

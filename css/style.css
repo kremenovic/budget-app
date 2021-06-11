@@ -76,7 +76,22 @@ h3 {
 }
 
 .mainContainer__content_section__transactions #transactions {
-  max-height: 450px;
+  max-height: 445px;
+}
+
+.mainContainer__content_section__transactions #transactions::-webkit-scrollbar {
+  display: block;
+  width: 5px;
+}
+
+.mainContainer__content_section__transactions #transactions::-webkit-scrollbar-track {
+  background: var(--expenseBackground-color);
+}
+
+.mainContainer__content_section__transactions #transactions::-webkit-scrollbar-thumb {
+  background-color: var(--income-color);
+  border-right: none;
+  border-left: none;
 }
 
 .mainContainer__content_section__transactions #transactions.scroll {
@@ -159,6 +174,95 @@ h3 {
   border-bottom-left-radius: 25px;
   height: 27px;
   width: 50%;
+}
+
+.mainContainer__content_section__summary .chart {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin-top: 50px;
+}
+
+.mainContainer__content_section__summary .chart__left {
+  width: 40%;
+  margin-right: 20px;
+}
+
+.mainContainer__content_section__summary .chart__left p {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  font-size: 18px;
+  color: #fff;
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+
+.mainContainer__content_section__summary .chart__left__income {
+  color: var(--income-color);
+}
+
+.mainContainer__content_section__summary .chart__left__expense {
+  color: var(--expense-color);
+}
+
+.mainContainer__content_section__summary .chart__left__list {
+  list-style-type: none;
+}
+
+.mainContainer__content_section__summary .chart__left__list__item {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 15px;
+}
+
+.mainContainer__content_section__summary .chart__left__list__item i {
+  font-size: 14px;
+}
+
+.mainContainer__content_section__summary .chart__left__list__item .item__clothes i {
+  color: var(--clothes-color);
+}
+
+.mainContainer__content_section__summary .chart__left__list__item .item__gifts i {
+  color: var(--gifts-color);
+}
+
+.mainContainer__content_section__summary .chart__left__list__item .item__shopping i {
+  color: var(--shopping-color);
+}
+
+.mainContainer__content_section__summary .chart__left__list__item .item__eatingOut i {
+  color: var(--eatingOut-color);
+}
+
+.mainContainer__content_section__summary .chart__left__list__item .item__sports i {
+  color: var(--sports-color);
+}
+
+.mainContainer__content_section__summary .chart__left__list__item:last-child {
+  margin-bottom: 0px;
+}
+
+.mainContainer__content_section__summary .chart__right {
+  width: 60%;
+  margin-left: 20px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
 }
 
 .btns {
@@ -301,5 +405,59 @@ h3 {
   padding-left: 15px;
   padding-right: 15px;
   font-size: 18px;
+}
+
+/* RESPONSIVE */
+@media only screen and (max-width: 1024px) {
+  .mainContainer {
+    padding: 40px 40px 105px;
+  }
+  .mainContainer__content_section {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+  }
+  .mainContainer__content_section__transactions {
+    width: 100%;
+  }
+  .mainContainer__content_section__summary {
+    width: 100%;
+    margin-top: 60px;
+    margin-left: 0px;
+  }
+  .mainContainer__content_section__summary .chart {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+  }
+  .mainContainer__content_section__summary .chart__left {
+    width: 100%;
+    margin-right: 0px;
+  }
+  .mainContainer__content_section__summary .chart__right {
+    width: 100%;
+    margin-top: 60px;
+    margin-left: 0px;
+  }
+  .btns {
+    margin-top: 85px;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+  }
+}
+
+@media only screen and (max-width: 540px) {
+  h1 {
+    font-size: 25px;
+  }
+  .mainContainer__content {
+    padding: 60px 15px 50px;
+  }
+  .btns .btn {
+    padding: 15px 40px;
+  }
 }
 /*# sourceMappingURL=style.css.map */
