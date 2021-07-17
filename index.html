@@ -20,10 +20,10 @@
       <div class="mainContainer__content_section">
         <div class="mainContainer__content_section__transactions">
           <h3>Transcations</h3>
-          <div id="transactions" class="scroll js-transactions">
+          <div id="transactions" class="scroll">
             <!-- <h3 class="noTransactions">No transactions</h3> -->
-            <ul>
-              <li class="income">Clothes | Blue T-Shirt <span class="amount">$50</span></li>
+            <ul class="js-transactions">
+              <!-- <li class="income" data-id="1">Clothes | Blue T-Shirt <span class="amount">$50</span></li>
               <li class="expense">Clothes | Red T-Shirt <span class="amount">$50</span></li>
               <li class="expense">Clothes | Blue T-Shirt <span class="amount">$50</span></li>
               <li class="expense">Clothes | Blue T-Shirt <span class="amount">$50</span></li>
@@ -31,7 +31,7 @@
               <li class="expense">Clothes | Blue T-Shirt <span class="amount">$50</span></li>
               <li class="expense">Clothes | Blue T-Shirt <span class="amount">$50</span></li>
               <li class="expense">Clothes | Blue T-Shirt <span class="amount">$50</span></li>
-              <li class="expense">Clothes | Red T-Shirt <span class="amount">$50</span></li>
+              <li class="expense">Clothes | Red T-Shirt <span class="amount">$50</span></li> -->
             </ul>
           </div>
         </div>
@@ -67,45 +67,23 @@
         </div>
       </div>
       <div class="btns">
-        <button class="btn btn__income js-addIncome">+ Income</button>
-        <button class="btn btn__expense js-addExpense">- Expense</button>
+        <button class="btn btn__income js-btnAddIncome">+ Income</button>
+        <button class="btn btn__expense js-btnAddExpense">- Expense</button>
       </div>
     </div>
   </div>
-  <!-- Add Income Pop Up -->
-  <div id="js-addIncome" class="addTransaction">
-    <h3>Add Income</h3>
+  <!-- Transaction Modal/Popup -->
+  <div class="addTransaction js-modal">
+    <h3 class="js-modalTitle"></h3>
     <div class="addTransaction__form">
-      <input type="text" placeholder="Title" class="addTransaction__form__input js-income-title">
-      <input type="text" placeholder="Amount" class="addTransaction__form__input js-income-amount">
-      <select name="category" id="category" class="addTransaction__form__select js-income-category">
-        <option value="" disabled selected>Select...</option>
-        <option value="income">Income</option>
+      <input type="text" placeholder="Title" class="addTransaction__form__input js-title">
+      <input type="text" placeholder="Amount" class="addTransaction__form__input js-amount">
+      <select name="category" id="category" class="addTransaction__form__select js-category">
       </select>
     </div>
     <div class="btns">
-      <button class="btn btn__save js-saveIncome">Save</button>
-      <button class="btn btn__cancel js-cancelIncome">Cancel</button>
-    </div>
-  </div>
-  <!-- Add Expense Pop Up -->
-  <div id="js-addExpense" class="addTransaction">
-    <h3>Add Expense</h3>
-    <div class="addTransaction__form">
-      <input type="text" placeholder="Title" class="addTransaction__form__input js-expense-title">
-      <input type="text" placeholder="Amount" class="addTransaction__form__input js-expense-amount">
-      <select name="category" id="category" class="addTransaction__form__select js-expense-category">
-        <option value="" disabled selected>Select...</option>
-        <option value="clothes">Clothes</option>
-        <option value="gifts">Gifts</option>
-        <option value="shopping">Shopping</option>
-        <option value="eatingOut">Eating out</option>
-        <option value="sports">Sports</option>
-      </select>
-    </div>
-    <div class="btns">
-      <button class="btn btn__save js-saveExpense">Save</button>
-      <button class="btn btn__cancel js-cancelExpense">Cancel</button>
+      <button class="btn btn__save js-save">Save</button>
+      <button class="btn btn__cancel js-cancel">Cancel</button>
     </div>
   </div>
   <div id="overlay" class="js-overlay"></div>
