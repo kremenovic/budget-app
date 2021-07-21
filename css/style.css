@@ -3,6 +3,7 @@
   --contentContainer-color: #2A272F;
   --income-color: #03DAC5;
   --expense-color: #BB86FC;
+  --negative-color: #df1b1b;
   --incomeBackground-color: #332940;
   --expenseBackground-color: #3B383F;
   --clothes-color: #F48FB1;
@@ -58,6 +59,25 @@ h3 {
   color: var(--income-color);
 }
 
+.mainContainer__info #balance .negative {
+  color: var(--negative-color);
+}
+
+.mainContainer.authentication {
+  padding-bottom: 0px;
+}
+
+.mainContainer.authentication .mainContainer__info {
+  text-align: center;
+  width: 100%;
+  display: inline-block;
+}
+
+.mainContainer.authentication .mainContainer__content {
+  width: 500px;
+  margin: 100px auto 0px;
+}
+
 .mainContainer__content {
   background-color: var(--contentContainer-color);
   border-radius: var(--borderRadius);
@@ -68,6 +88,59 @@ h3 {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+}
+
+.mainContainer__content_section.login-register {
+  display: block;
+  text-align: center;
+}
+
+.mainContainer__content_section.login-register .authenticationBtns {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.mainContainer__content_section.login-register .authenticationBtns .btn {
+  padding: 15px 55px;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  font-size: 20px;
+  background-color: var(--inputBackground);
+  width: 100%;
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
+}
+
+.mainContainer__content_section.login-register .authenticationBtns .btn:hover {
+  opacity: 0.8;
+}
+
+.mainContainer__content_section.login-register .authenticationBtns .btn.active {
+  background-color: var(--income-color);
+  color: #fff;
+}
+
+.mainContainer__content_section.login-register .tab_content {
+  display: none;
+}
+
+.mainContainer__content_section.login-register .tab_content.active {
+  display: block;
+}
+
+.mainContainer__content_section.login-register .addTransaction__form {
+  max-width: 600px;
+  margin: 30px auto 0px;
+}
+
+.mainContainer__content_section.login-register .btns {
+  display: block;
+  margin-top: 30px;
 }
 
 .mainContainer__content_section__transactions {
@@ -455,6 +528,13 @@ h3 {
   }
   .mainContainer__content {
     padding: 60px 15px 50px;
+  }
+  .mainContainer.authentication .mainContainer__content {
+    margin: 30px auto 0px;
+    width: 100%;
+  }
+  .mainContainer.authentication .mainContainer__content .authenticationBtns .btn {
+    padding: 15px 15px;
   }
   .btns .btn {
     padding: 15px 40px;

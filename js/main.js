@@ -9,13 +9,21 @@ function getElement(selection) {
   );
 }
 
-let id = null;
+// for ID
+let date = new Date();
+let time = date.getTime();
+let id = time;
 
 const addIncomeBtn = getElement(".js-btnAddIncome");
 const addExpenseBtn = getElement(".js-btnAddExpense");
 const transactions = getElement(".js-transactions");
 const saveBtn = getElement(".js-save");
 const closeBtn = getElement(".js-cancel");
+const balance = getElement(".js-balance");
+const income = getElement(".js-income");
+const expense = getElement(".js-expense");
+
+// ADD TRANSACTION
 
 class Transactions {
   constructor(element) {
@@ -54,14 +62,17 @@ class Transactions {
 
   saveTransaction(target) {
     let modal = target.parentElement.parentElement;
-    let transactionID = id++;
+    let transactionID = id += 1;
     this.title = modal.querySelector(".js-title");
     this.amount = modal.querySelector(".js-amount");
     this.category = modal.querySelector(".js-category");
+    const title = this.title.value;
+    const value = this.amount.value;
 
     if (this.category.value !== "select") {
-      if (this.title.value !== "" || this.amount.value !== "") {
-        this.createElement(transactionID, this.category.length, this.title.value, this.category.value, this.amount.value);
+      if (this.title.value !== "" && this.amount.value !== "") {
+        // this.createElement(transactionID, this.category.value, this.title.value, this.category.value, this.amount.value);
+        this.addToFirebase(parseInt(transactionID), this.category.value, title, parseInt(value));
         this.closeModal(target);
         this.backToDefault(this.title, this.amount);
       } else {
@@ -73,18 +84,47 @@ class Transactions {
     
   }
 
-  createElement(id, categoryNumber, title, category, amount) {
+  createElement(id, categoryName, title, category, amount) {
     let item = document.createElement("li");
-    if(categoryNumber > 1) {
-      item.classList.add("expense");
-
-    } else {
+    if(categoryName == "Income") {
       item.classList.add("income");
+    } else {
+      item.classList.add("expense");
     }
 
     item.setAttribute("data-id", id);
     item.innerHTML = `${category} | ${title}<span class="amount">$${amount}</span>`;
     transactions.appendChild(item);
+  }
+
+  addToFirebase(id, category, title, value) {
+    if(category === "Income") {
+      auth.onAuthStateChanged(user => {
+        if (user) {
+          db.collection('transactions').add({
+            id: id,
+            user: user.uid,
+            type: "income",
+            title: title,
+            value: value,
+            category: category
+          })
+        }
+      })
+    } else {
+      auth.onAuthStateChanged(user => {
+        if (user) {
+          db.collection('transactions').add({
+            id: id,
+            user: user.uid,
+            type: "expense",
+            title: title,
+            value: value,
+            category: category
+          })
+        }
+      })
+    }
   }
 
   backToDefault (title, amount) {
@@ -93,10 +133,59 @@ class Transactions {
   }
 }
 
+// FIREBASE 
+
+auth.onAuthStateChanged(user => {
+  
+  // check authentication
+  if (!user) {
+    location = 'index.html';
+  }
+
+  let allIncomes = [];
+  let sumIncomes = 0;
+  let allExpenses = [];
+  let sumExpenses = 0;
+  let balanceValue = 0;
+
+  db.collection("transactions").where("user", "==", user.uid).orderBy("id").onSnapshot(snapshot => {
+    let changes = snapshot.docChanges();
+    changes.forEach(change => {
+      if(change.type == "added") {
+         // add to transactions
+        transaction.createElement(change.doc.data().id, change.doc.data().category, change.doc.data().title, change.doc.data().category, change.doc.data().value);
+          // get expense
+        if(change.doc.data().type == "expense") {
+          allExpenses.push(parseInt(change.doc.data().value));
+          sumExpenses = allExpenses.reduce((a, b) => a + b, 0);
+          expense.innerHTML = `$${sumExpenses}`;
+           // get income
+        } else if(change.doc.data().type == "income") {
+          allIncomes.push(parseInt(change.doc.data().value));
+          sumIncomes = allIncomes.reduce((a, b) => a + b, 0);
+          income.innerHTML = `$${sumIncomes}`;
+        }
+        balanceValue = sumIncomes - sumExpenses;
+        updateBalance(balanceValue);
+      }
+    })
+  })
+});
+
+const updateBalance = (value) => {
+  if(value < 0) {
+    balance.style.color = `var(--negative-color)`;
+  } else{ 
+    balance.style.color = `var(--income-color)`;
+  }
+  balance.innerHTML = `$${value}`;
+}
+
 const transaction = new Transactions ();
-const jsChart = getElement("#budgetChart").getContext("2d");
 
 // CHART
+
+const jsChart = getElement("#budgetChart").getContext("2d");
 
 // colors
 const chartColors = [

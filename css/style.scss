@@ -5,6 +5,7 @@
   --contentContainer-color: #2A272F;
   --income-color: #03DAC5;
   --expense-color: #BB86FC;
+  --negative-color: #df1b1b;
   --incomeBackground-color: #332940;
   --expenseBackground-color: #3B383F;
   --clothes-color: #F48FB1;
@@ -52,7 +53,27 @@ h3 {
 
     #balance {
       color: var(--income-color);
+
+      .negative {
+        color: var(--negative-color);
+      }
     }
+  }
+
+  &.authentication {
+    padding-bottom: 0px;
+
+    .mainContainer__info {
+      text-align: center;
+      width: 100%;
+      display: inline-block;
+    }
+
+    .mainContainer__content {
+      width: 500px;
+      margin: 100px auto 0px;
+    }
+    
   }
 
   &__content {
@@ -62,6 +83,54 @@ h3 {
 
     &_section {
       display: flex;
+
+      &.login-register {
+        display: block;
+        text-align: center;
+
+        .authenticationBtns {
+          display: flex;
+          justify-content: center;
+
+          .btn {
+            padding: 15px 55px;
+            border: none;
+            outline: none;
+            cursor: pointer;
+            font-size: 20px;
+            background-color: var(--inputBackground);
+            width: 100%;
+            transition: 0.3s;
+
+            &:hover {
+              opacity: 0.8;
+            }
+
+            &.active {
+              background-color: var(--income-color);
+              color: #fff;
+            }
+          }
+        }
+
+        .tab_content {
+          display: none;
+
+          &.active {
+            display: block;
+          }
+        }
+
+        .addTransaction__form {
+          max-width: 600px;
+          margin: 30px auto 0px;
+        }
+
+        .btns {
+          display: block;
+          margin-top: 30px;
+        }
+      }
 
       &__transactions {
         width: 50%;
@@ -418,8 +487,21 @@ h3 {
     &__content {
       padding: 60px 15px 50px;
     }
-  }
+    &.authentication {
+      .mainContainer__content {
+        margin: 30px auto 0px;
+        width: 100%;
 
+        .authenticationBtns {
+
+          .btn {
+            padding: 15px 15px;
+          }
+        }
+      }
+    }
+    
+  }
   .btns {
     .btn {
       padding: 15px 40px;
