@@ -67,6 +67,40 @@ input[type=number] {
   padding-bottom: 20px;
 }
 
+.mainContainer__info--top {
+  font-size: 60px;
+  border-bottom: 1px solid var(--contentContainer-color);
+  padding-bottom: 5px;
+  margin-bottom: 20px;
+}
+
+.mainContainer__info--top h3 {
+  color: var(--income-color);
+  cursor: pointer;
+  padding-bottom: 0px;
+}
+
+.mainContainer__info--bottom {
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+}
+
+.mainContainer__info h1 {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.mainContainer__info h1 img {
+  width: 20px;
+  margin-left: 25px;
+  cursor: pointer;
+}
+
 .mainContainer__info #balance {
   color: var(--income-color);
 }

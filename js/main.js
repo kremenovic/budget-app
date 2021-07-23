@@ -29,9 +29,9 @@ const chartShopping = getElement(".js-chart-shopping");
 const chartEatingOut = getElement(".js-chart-eatingOut");
 const chartSports = getElement(".js-chart-sports");
 const noTransactions = getElement(".js-noTransactions");
+const logoutBtn = getElement(".js-logOutBtn");
 
 // ADD TRANSACTION
-
 class Transactions {
   constructor(element) {
     this.openBtns = element;
@@ -151,7 +151,6 @@ class Transactions {
 }
 
 // FIREBASE 
-
 auth.onAuthStateChanged(user => {
   
   // check authentication
@@ -285,6 +284,7 @@ auth.onAuthStateChanged(user => {
   })
 });
 
+
 // Balance
 const updateBalance = (value) => {
   if(value < 0) {
@@ -318,10 +318,13 @@ const checkTransactionsCount = () => {
   }
 }
 
+const logout = () => {
+  auth.signOut();
+}
+
 const transaction = new Transactions ();
 
 // CHART
-
 const jsChart = getElement("#budgetChart").getContext("2d");
 
 // colors
@@ -362,7 +365,6 @@ const updateChartValues = (array, dataOrder) => {
 }
 
 // EVENT LISTENERS
-
 window.addEventListener("DOMContentLoaded", () => {
   jsChart.canvas.parentNode.style.height = "355px";
   jsChart.canvas.parentNode.style.width = "355px";
@@ -383,3 +385,5 @@ saveBtn.addEventListener("click", function (e) {
 closeBtn.addEventListener("click", function (e) {
   transaction.closeModal(e.target);
 })
+
+logoutBtn.addEventListener("click", logout);

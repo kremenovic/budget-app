@@ -12,9 +12,12 @@
 </head>
 <body>
   <div class="mainContainer">
-    <div class="mainContainer__info">
+    <div class="mainContainer__info mainContainer__info--top">
       <h1>Budget Planner</h1>
-      <h1>Balance: <span id="balance" class="js-balance">$0</span> </h1>
+      <h3 class="js-logOutBtn">Log out</h3>
+    </div>
+    <div class="mainContainer__info mainContainer__info--bottom">
+      <h1>Balance: <span id="balance" class="js-balance"> $0</span></h1>
     </div>
     <div class="mainContainer__content">
       <div class="mainContainer__content_section">
@@ -23,7 +26,6 @@
           <div id="transactions" class="scroll">
             <h3 class="noTransactions js-noTransactions">There are no transactions.</h3>
             <ul class="js-transactions">
-              <!-- <li class="income" data-id="1">Clothes | Blue T-Shirt <span class="amount">$50 <i class="far fa-trash-alt js-trash"></i></span></li> -->
             </ul>
           </div>
         </div>

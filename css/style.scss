@@ -62,10 +62,35 @@ input[type=number] {
     display: flex;
     justify-content: space-between;
     padding-bottom: 20px;
+    
+    &--top {
+      font-size: 60px;
+      border-bottom: 1px solid var(--contentContainer-color);
+      padding-bottom: 5px;
+      margin-bottom: 20px;
+
+      h3 {
+        color: var(--income-color);
+        cursor: pointer;
+        padding-bottom: 0px;
+      }
+    }
+    &--bottom {
+      justify-content: flex-end;
+    }
+   h1 {
+     display: flex;
+     align-items: center;
+
+     img {
+       width: 20px;
+       margin-left: 25px;
+       cursor: pointer;
+     }
+   }
 
     #balance {
       color: var(--income-color);
-
       .negative {
         color: var(--negative-color);
       }
