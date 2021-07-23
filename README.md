@@ -1,7 +1,7 @@
 # budget-app
 <h1>Budget App Project</h1>
 
-<a href="#"><img src="https://i.imgur.com/xUpO3XI.png"></a>
+<a href="https://kremenovic.github.io/budget-app/"><img src="https://i.imgur.com/xUpO3XI.png"></a>
 
 Budget planner has been my new project for a github portfolio. Like in Todo List project, I used BEM, SCSS and vanilla JS. 
 
@@ -66,4 +66,4 @@ This could be a great starter kit for a project with React or any other framewor
     - Set up expense categories
 
 <h3>Live demo</h3>
-<a href="#" target="_blank">Click here to see live demo</a>
+<a href="https://kremenovic.github.io/budget-app/" target="_blank">Click here to see live demo</a>
