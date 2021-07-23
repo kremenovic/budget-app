@@ -4,14 +4,51 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="./css/style.css">
   <link rel="icon" type="image/jpg" href="./favicon-32x32.png"/>
   <title>Budget App Project</title>
 </head>
 <body>
+  <div class="mainContainer authentication">
+    <div class="mainContainer__info">
+      <h1>Budget Planner</h1>
+    </div>
+    <div class="mainContainer__content">
+      <div class="mainContainer__content_section login-register">
+          <div class="authenticationBtns">
+            <button class="btn active js-registerTab js-tabs">Register</button>
+            <button class="btn js-loginTab js-tabs">Login</button>
+          </div>
+          <div class="tab_content active js-registerTabContent">
+            <div class="addTransaction__form">
+              <input type="text" placeholder="Name" class="addTransaction__form__input js-registerName">
+              <input type="email" placeholder="Email" class="addTransaction__form__input js-registerEmail">
+              <input type="password" placeholder="Password" class="addTransaction__form__input js-registerPassword">
+            </div>
+            <div class="btns">
+              <button class="btn btn__income js-registerBtn">Register</button>
+            </div>
+          </div>
+          <div class="tab_content js-loginTabContent">
+            <div class="addTransaction__form">
+              <input type="email" placeholder="Email" class="addTransaction__form__input js-loginEmail">
+              <input type="password" placeholder="Password" class="addTransaction__form__input js-loginPassword">
+            </div>
+            <div class="btns">
+              <button class="btn btn__income js-loginBtn">Login</button>
+            </div>
+          </div>
+      </div>
+    </div>
+  </div>
   
-  <script src="https://cdn.jsdelivr.net/npm/chart.js@3.3.2/dist/chart.min.js"></script>
-  <script src="./main.js"></script>
+  <!-- The core Firebase JS SDK is always required and must be listed first -->
+  <script src="https://www.gstatic.com/firebasejs/8.7.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.7.1/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.7.1/firebase-firestore.js"></script>
+  <script src="./js/firebase.js"></script>
+  <script src="./js/authentication.js"></script>
 </body>
 </html>
