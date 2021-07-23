@@ -78,6 +78,13 @@ const loginAuth = () => {
 
 }
 
+// check if it's logged in
+auth.onAuthStateChanged(user => {
+    if (user) {
+      location = 'dashboard.html';
+    }
+});
+
 // EVENT LISTENERS
 
 registerBtn.addEventListener("click", registerAuth);

@@ -22,6 +22,13 @@ const closeBtn = getElement(".js-cancel");
 const balance = getElement(".js-balance");
 const income = getElement(".js-income");
 const expense = getElement(".js-expense");
+const progressBar = getElement(".js-progressBarValue");
+const chartClothes = getElement(".js-chart-clothes");
+const chartGifts = getElement(".js-chart-gifts");
+const chartShopping = getElement(".js-chart-shopping");
+const chartEatingOut = getElement(".js-chart-eatingOut");
+const chartSports = getElement(".js-chart-sports");
+const noTransactions = getElement(".js-noTransactions");
 
 // ADD TRANSACTION
 
@@ -93,16 +100,26 @@ class Transactions {
     }
 
     item.setAttribute("data-id", id);
-    item.innerHTML = `${category} | ${title}<span class="amount">$${amount}</span>`;
+    item.innerHTML = `${category} | ${title}<span class="amount">$${amount} <i class="far fa-trash-alt js-trash"></i></span>`;
     transactions.appendChild(item);
+
+    let trash = item.querySelector(".js-trash");
+    trash.addEventListener("click", e => {
+      let trashID = e.target.parentElement.parentElement.dataset.id;
+      auth.onAuthStateChanged(user => {
+        if (user) {
+          db.collection('transactions').doc(trashID).delete();
+        }
+      })
+    })
   }
 
   addToFirebase(id, category, title, value) {
     if(category === "Income") {
       auth.onAuthStateChanged(user => {
         if (user) {
-          db.collection('transactions').add({
-            id: id,
+          db.collection('transactions').doc("_" + id).set({
+            id: "_" + id,
             user: user.uid,
             type: "income",
             title: title,
@@ -114,8 +131,8 @@ class Transactions {
     } else {
       auth.onAuthStateChanged(user => {
         if (user) {
-          db.collection('transactions').add({
-            id: id,
+          db.collection('transactions').doc("_" + id).set({
+            id: "_" + id,
             user: user.uid,
             type: "expense",
             title: title,
@@ -148,30 +165,127 @@ auth.onAuthStateChanged(user => {
   let sumExpenses = 0;
   let balanceValue = 0;
 
+  let allClothes = [];
+  let sumClothes = 0;
+  let allGifts = [];
+  let sumGifts = 0;
+  let allShopping = [];
+  let sumShopping = 0;
+  let allEating = [];
+  let sumEating = 0;
+  let allSports = [];
+  let sumSports = 0;
+
   db.collection("transactions").where("user", "==", user.uid).orderBy("id").onSnapshot(snapshot => {
     let changes = snapshot.docChanges();
     changes.forEach(change => {
       if(change.type == "added") {
-         // add to transactions
+        // add to transactions
         transaction.createElement(change.doc.data().id, change.doc.data().category, change.doc.data().title, change.doc.data().category, change.doc.data().value);
-          // get expense
+        // get expense
         if(change.doc.data().type == "expense") {
           allExpenses.push(parseInt(change.doc.data().value));
           sumExpenses = allExpenses.reduce((a, b) => a + b, 0);
           expense.innerHTML = `$${sumExpenses}`;
-           // get income
+          // get income
         } else if(change.doc.data().type == "income") {
           allIncomes.push(parseInt(change.doc.data().value));
           sumIncomes = allIncomes.reduce((a, b) => a + b, 0);
           income.innerHTML = `$${sumIncomes}`;
         }
+        // update categories
+        switch(change.doc.data().category) {
+          case "Clothes":
+            allClothes.push(parseInt(change.doc.data().value));
+            sumClothes = allClothes.reduce((a, b) => a + b, 0);
+            chartClothes.innerHTML = `$${sumClothes}`;
+            updateChartValues(sumClothes, 0);
+            break;
+          case "Gifts":
+            allGifts.push(parseInt(change.doc.data().value));
+            sumGifts = allGifts.reduce((a, b) => a + b, 0);
+            chartGifts.innerHTML = `$${sumGifts}`;
+            updateChartValues(sumGifts, 1);
+            break;
+          case "Shopping":
+            allShopping.push(parseInt(change.doc.data().value));
+            sumShopping = allShopping.reduce((a, b) => a + b, 0);
+            chartShopping.innerHTML = `$${sumShopping}`;
+            updateChartValues(sumShopping, 2);
+            break;
+          case "EatingOut":
+            allEating.push(parseInt(change.doc.data().value));
+            sumEating = allEating.reduce((a, b) => a + b, 0);
+            chartEatingOut.innerHTML = `$${sumEating}`;
+            updateChartValues(sumEating, 3);
+            break;
+          case "Sports":
+            allSports.push(parseInt(change.doc.data().value));
+            sumSports = allSports.reduce((a, b) => a + b, 0);
+            chartSports.innerHTML = `$${sumSports}`;
+            updateChartValues(sumSports, 4);
+        }
         balanceValue = sumIncomes - sumExpenses;
         updateBalance(balanceValue);
+        calculateProgressBar(sumIncomes, sumExpenses);
+        checkTransactionsCount();
+      } else if (change.type == "removed") {
+        let removedLi = transactions.querySelector("[data-id=" + change.doc.id + "]");
+        transactions.removeChild(removedLi);
+         // get expense
+         if(change.doc.data().type == "expense") {
+          allExpenses.pop(parseInt(change.doc.data().value));
+          sumExpenses = allExpenses.reduce((a, b) => a + b, 0);
+          expense.innerHTML = `$${sumExpenses}`;
+          // get income
+        } else if(change.doc.data().type == "income") {
+          allIncomes.pop(parseInt(change.doc.data().value));
+          sumIncomes = allIncomes.reduce((a, b) => a + b, 0);
+          income.innerHTML = `$${sumIncomes}`;
+        }
+        // update categories
+        switch(change.doc.data().category) {
+          case "Clothes":
+            allClothes.pop(parseInt(change.doc.data().value));
+            sumClothes = allClothes.reduce((a, b) => a + b, 0);
+            chartClothes.innerHTML = `$${sumClothes}`;
+            updateChartValues(sumClothes, 0);
+            break;
+          case "Gifts":
+            allGifts.pop(parseInt(change.doc.data().value));
+            sumGifts = allGifts.reduce((a, b) => a + b, 0);
+            chartGifts.innerHTML = `$${sumGifts}`;
+            updateChartValues(sumGifts, 1);
+            break;
+          case "Shopping":
+            allShopping.pop(parseInt(change.doc.data().value));
+            sumShopping = allShopping.reduce((a, b) => a + b, 0);
+            console.log(sumShopping);
+            chartShopping.innerHTML = `$${sumShopping}`;
+            updateChartValues(sumShopping, 2);
+            break;
+          case "EatingOut":
+            allEating.pop(parseInt(change.doc.data().value));
+            sumEating = allEating.reduce((a, b) => a + b, 0);
+            chartEatingOut.innerHTML = `$${sumEating}`;
+            updateChartValues(sumEating, 3);
+            break;
+          case "Sports":
+            allSports.pop(parseInt(change.doc.data().value));
+            sumSports = allSports.reduce((a, b) => a + b, 0);
+            chartSports.innerHTML = `$${sumSports}`;
+            updateChartValues(sumSports, 4);
+        }
+        balanceValue = sumIncomes - sumExpenses;
+        updateBalance(balanceValue);
+        calculateProgressBar(sumIncomes, sumExpenses);
+        checkTransactionsCount();
       }
     })
   })
 });
 
+// Balance
 const updateBalance = (value) => {
   if(value < 0) {
     balance.style.color = `var(--negative-color)`;
@@ -179,6 +293,29 @@ const updateBalance = (value) => {
     balance.style.color = `var(--income-color)`;
   }
   balance.innerHTML = `$${value}`;
+}
+
+// Progress Bar
+const calculateProgressBar = (incomeValue, expenseValue) => {
+  let income = incomeValue;
+  let incomePercentage = 100;
+  let expense = expenseValue;
+  let expensePercentage = Math.floor((expense/income)*100);
+  let progressBarPercentage = 100 - Math.abs(expensePercentage - incomePercentage);
+  if(income == expense) {
+    progressBar.style.width = "50%";
+  } else if (expense > income) {
+    progressBar.style.width = `100%`;
+  } else {
+    progressBar.style.width = `${progressBarPercentage}%`;
+  }
+}
+
+const checkTransactionsCount = () => {
+  let transactionsElements = transactions.getElementsByTagName("li");
+  if(transactionsElements.length >= 0) {
+    noTransactions.setAttribute("style", "display: none");
+  }
 }
 
 const transaction = new Transactions ();
@@ -189,7 +326,6 @@ const jsChart = getElement("#budgetChart").getContext("2d");
 
 // colors
 const chartColors = [
-  "#03DAC5",
   "#F48FB1",
   "#9575CD",
   "#64B5F6",
@@ -200,10 +336,10 @@ const chartColors = [
 const chart = new Chart(jsChart, {
   type: "doughnut",
   data: {
-    labels: ["Income", "Clothes", "Gifts", "Shopping", "Eating out", "Sports"],
+    labels: ["Clothes", "Gifts", "Shopping", "Eating out", "Sports"],
     datasets: [
       {
-        data: [12, 19, 3, 5, 2, 3],
+        data: [0, 0, 0, 0, 0],
         backgroundColor: chartColors,
         borderColor: chartColors,
         borderWidth: 1,
@@ -218,6 +354,12 @@ const chart = new Chart(jsChart, {
     },
   },
 });
+
+// Update Doughnut Chart
+const updateChartValues = (array, dataOrder) => {
+  chart.data.datasets[0].data[dataOrder] = array;
+  chart.update();
+}
 
 // EVENT LISTENERS
 

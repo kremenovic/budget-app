@@ -8,7 +8,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="./css/style.css">
   <link rel="icon" type="image/jpg" href="./favicon-32x32.png"/>
-  <title>Budget App Projec - Dashboard</title>
+  <title>Budget App Project - Dashboard</title>
 </head>
 <body>
   <div class="mainContainer">
@@ -21,17 +21,9 @@
         <div class="mainContainer__content_section__transactions">
           <h3>Transcations</h3>
           <div id="transactions" class="scroll">
-            <!-- <h3 class="noTransactions">No transactions</h3> -->
+            <h3 class="noTransactions js-noTransactions">There are no transactions.</h3>
             <ul class="js-transactions">
-              <!-- <li class="income" data-id="1">Clothes | Blue T-Shirt <span class="amount">$50</span></li>
-              <li class="expense">Clothes | Red T-Shirt <span class="amount">$50</span></li>
-              <li class="expense">Clothes | Blue T-Shirt <span class="amount">$50</span></li>
-              <li class="expense">Clothes | Blue T-Shirt <span class="amount">$50</span></li>
-              <li class="expense">Clothes | Blue T-Shirt <span class="amount">$50</span></li>
-              <li class="expense">Clothes | Blue T-Shirt <span class="amount">$50</span></li>
-              <li class="expense">Clothes | Blue T-Shirt <span class="amount">$50</span></li>
-              <li class="expense">Clothes | Blue T-Shirt <span class="amount">$50</span></li>
-              <li class="expense">Clothes | Red T-Shirt <span class="amount">$50</span></li> -->
+              <!-- <li class="income" data-id="1">Clothes | Blue T-Shirt <span class="amount">$50 <i class="far fa-trash-alt js-trash"></i></span></li> -->
             </ul>
           </div>
         </div>
@@ -51,11 +43,11 @@
               <p>Income <span class="chart__left__income js-income">$0</span></p>
               <p>Expense <span class="chart__left__expense js-expense">$0</span></p>
               <ul class="chart__left__list">
-                <li class="chart__left__list__item"><span class="item__clothes"><i class="fas fa-square-full"></i> Clothes</span> <span class="js-chart-clothes">$350</span></li>
-                <li class="chart__left__list__item"><span class="item__gifts"><i class="fas fa-square-full"></i> Gifts</span> <span class="js-chart-gifts">$350</span></li>
-                <li class="chart__left__list__item"><span class="item__shopping"><i class="fas fa-square-full"></i> Shopping</span> <span class="js-chart-shopping">$350</span></li>
-                <li class="chart__left__list__item"><span class="item__eatingOut"><i class="fas fa-square-full"></i> Eating out</span> <span class="js-chart-eatingOut">$350</span></li>
-                <li class="chart__left__list__item"><span class="item__sports"><i class="fas fa-square-full"></i> Sports</span> <span class="js-chart-sports">$350</span></li>
+                <li class="chart__left__list__item"><span class="item__clothes"><i class="fas fa-square-full"></i> Clothes</span> <span class="js-chart-clothes">$0</span></li>
+                <li class="chart__left__list__item"><span class="item__gifts"><i class="fas fa-square-full"></i> Gifts</span> <span class="js-chart-gifts">$0</span></li>
+                <li class="chart__left__list__item"><span class="item__shopping"><i class="fas fa-square-full"></i> Shopping</span> <span class="js-chart-shopping">$0</span></li>
+                <li class="chart__left__list__item"><span class="item__eatingOut"><i class="fas fa-square-full"></i> Eating out</span> <span class="js-chart-eatingOut">$0</span></li>
+                <li class="chart__left__list__item"><span class="item__sports"><i class="fas fa-square-full"></i> Sports</span> <span class="js-chart-sports">$0</span></li>
               </ul>
             </div>
             <div class="chart__right">
@@ -77,7 +69,7 @@
     <h3 class="js-modalTitle"></h3>
     <div class="addTransaction__form">
       <input type="text" placeholder="Title" class="addTransaction__form__input js-title">
-      <input type="text" placeholder="Amount" class="addTransaction__form__input js-amount">
+      <input type="number" placeholder="Amount" class="addTransaction__form__input js-amount">
       <select name="category" id="category" class="addTransaction__form__select js-category">
       </select>
     </div>
